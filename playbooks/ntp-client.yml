@@ -1,0 +1,6 @@
+---
+- name: "Chrony server installation"
+  hosts: ntp_client
+  become: yes
+  roles:
+    - /home/ansible/roles/client-ntp
