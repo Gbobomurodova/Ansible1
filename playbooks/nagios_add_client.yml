@@ -1,0 +1,13 @@
+---
+- name: Add config file to a server
+  become: yes
+  hosts: 10.0.0.216
+  roles:
+    - roles/oleg.nagios-server
+
+- name: Configure nagios client
+  hosts: 10.0.0.218
+  become: yes
+  roles:
+    - oleg.nagios-client
+    

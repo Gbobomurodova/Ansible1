@@ -1,0 +1,27 @@
+---
+# # tasks file for roles/client-ntp
+# - name: Install chrony
+#   package:
+#     name: chrony
+#     state: latest
+
+# - name: Modify chrony.conf remove server
+#   ansible.builtin.lineinfile:
+#     path: /etc/chrony.conf
+#     regexp: '^server {{ item }}.centos.pool.ntp.org iburst'
+
+#     line: '#server {{ item }}.centos.pool.ntp.org iburst'
+#   loop: "{{ number }}"
+
+- name: Modify chrony.conf add ntp server ip
+  ansible.builtin.lineinfile:
+    path: /etc/chrony.conf
+    line: server 10.0.0.216 iburst
+    state: present
+
+- name: Start and enable chronyd
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+    
